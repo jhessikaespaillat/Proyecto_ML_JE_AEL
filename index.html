@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Asistente de Inteligencia Artificial para la Planificación Docente basado en Machine Learning y el dataset OULAD - Proyecto Final UFHEC por Jhessika Lidabed Espaillat Espaillat.">
+    <title>Asistente de IA para la Planificación Docente | Proyecto Final ML - UFHEC</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Barra de Navegación Institucional -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#inicio" class="nav-brand">
+                <span>UFHEC · IAE-2501</span> Asistente IA Planificación Docente
+            </a>
+            <ul class="nav-links">
+                <li><a href="#resumen">Resumen</a></li>
+                <li><a href="#problema">Problema y Dataset</a></li>
+                <li><a href="#metodologia">Metodología CRISP-ML</a></li>
+                <li><a href="#eda">Hallazgos EDA</a></li>
+                <li><a href="#evaluacion">Evaluación Modelos</a></li>
+                <li><a href="#simulador">Simulador y Reglas</a></li>
+                <li><a href="#etica">Ética y Enlaces</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Encabezado / Hero Institucional -->
+    <header id="inicio" class="hero">
+        <div class="hero-container">
+            <div>
+                <span class="badge-inst">Universidad Federico Henríquez y Carvajal (UFHEC)</span>
+                <h1>Asistente de Inteligencia Artificial para la Planificación Docente</h1>
+                <p class="hero-subtitle">
+                    Prototipo inteligente de predicción temprana de resultados académicos y motor de recomendaciones pedagógicas basado en el conjunto de datos <strong>Open University Learning Analytics Dataset (OULAD)</strong>.
+                </p>
+                <div class="hero-meta">
+                    <p><strong>Programa:</strong> Maestría en Inteligencia Artificial Aplicada a la Educación e Investigación</p>
+                    <p><strong>Asignatura:</strong> Aprendizaje Automático (<em>Machine Learning</em>) · Código: <code>IAE-2501</code></p>
+                    <p><strong>Docente Titular:</strong> Mtro. Feibert Guzmán</p>
+                    <p><strong>Estudiante / Autora:</strong> Jhessika Lidabed Espaillat Espaillat</p>
+                </div>
+                <div class="btn-group">
+                    <a href="#simulador" class="btn btn-primary">🎯 Probar Vista Previa del Simulador</a>
+                    <a href="https://github.com/JhessikaEspaillat/Proyecto_ML_Planificacion_Docente" target="_blank" rel="noopener noreferrer" class="btn btn-outline">💻 Repositorio en GitHub</a>
+                    <a href="reports/Reporte_Perfilado_OULAD.html" target="_blank" class="btn btn-outline">📊 Informe YData Profiling</a>
+                </div>
+            </div>
+
+            <div class="hero-stats-card">
+                <h3>Indicadores Reales Verificados (OULAD)</h3>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <span class="stat-value">32,593</span>
+                        <span class="stat-label">Registros Estudiantiles Analizados</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">52.8%</span>
+                        <span class="stat-label">Tasa de Fracaso / Retiro (Clase 0)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">0.6651</span>
+                        <span class="stat-label">ROC-AUC Random Forest (Sin Fuga)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">7 Reglas</span>
+                        <span class="stat-label">Dimensiones Pedagógicas Docentes</span>
+                    </div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.8rem; color: #cbd5e1; text-align: center;">
+                    Entrenamiento: <code>26,074</code> casos (80%) · Prueba Estratificada: <code>6,519</code> casos (20%) · Cohorte Temporal <code>2014J</code>: <code>11,260</code> casos.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sección 1: Sumario Ejecutivo -->
+    <section id="resumen" class="section">
+        <div class="section-header">
+            <span class="section-tag">1. Contextualización Ejecutiva</span>
+            <h2>Sumario Ejecutivo del Proyecto</h2>
+            <p>
+                Fortalecimiento de la toma de decisiones pedagógicas mediante analítica del aprendizaje reproducible y sistemas híbridos de inteligencia artificial.
+            </p>
+        </div>
+        <div class="grid-3">
+            <div class="card">
+                <h3>🎯 Propósito Pedagógico</h3>
+                <p>
+                    Transformar la información sociodemográfica y de matrícula inicial en alertas preventivas que permitan al docente planificar tutorías, actividades de refuerzo y evaluaciones formativas desde la primera semana de clases.
+                </p>
+            </div>
+            <div class="card">
+                <h3>🔬 Clasificación Binaria Supervisada</h3>
+                <p>
+                    El modelo clasifica los resultados académicos en dos categorías accionables:
+                </p>
+                <ul>
+                    <li><strong>Clase 0 (52.8%):</strong> Fracaso académico o retiro (<code>Fail</code> / <code>Withdrawn</code> — 17,208 casos).</li>
+                    <li><strong>Clase 1 (47.2%):</strong> Éxito académico (<code>Pass</code> / <code>Distinction</code> — 15,385 casos).</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>🧭 Arquitectura Híbrida</h3>
+                <p>
+                    Se separa estrictamente la <strong>predicción probabilística del modelo</strong> (<code>RandomForestClassifier</code>) del <strong>motor determinista de recomendaciones pedagógicas basado en reglas explícitas</strong> en 7 dimensiones docentes.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 2: Problema Educativo y Dataset OULAD -->
+    <div class="section-alt">
+        <section id="problema" class="section">
+            <div class="section-header">
+                <span class="section-tag">2. Planteamiento y Fuente de Datos</span>
+                <h2>Problema Educativo, Justificación y Dataset OULAD</h2>
+                <p>
+                    Análisis empírico sobre el <em>Open University Learning Analytics Dataset</em> (Kuzilek et al., 2017) publicado en <em>Scientific Data (Nature)</em>.
+                </p>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>⚠️ El Problema de la Detección Reactiva</h3>
+                    <p>
+                        En la educación superior universitaria, más de la mitad de las inscripciones en modalidades flexibles o a distancia enfrentan riesgo de reprobación (<code>21.64%</code>) o retiro prematuro (<code>31.16%</code>). Cuando el docente identifica estas dificultades únicamente a través del examen final, ya no existe margen temporal para reajustar la planificación didáctica.
+                    </p>
+                    <p style="margin-top: 0.65rem;">
+                        <strong>Justificación:</strong> Proveer un asistente preventivo desde el momento de la matrícula permite asignar recursos de nivelación focalizados sin etiquetar ni excluir al estudiante.
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>🗄️ Estructura del Dataset OULAD (<code>studentInfo.csv</code>)</h3>
+                    <ul>
+                        <li><strong>Volumen:</strong> <code>32,593</code> registros estudiantiles y <code>12</code> columnas originales en 7 módulos (<code>AAA</code>–<code>GGG</code>) y 4 presentaciones (<code>2013B</code>, <code>2013J</code>, <code>2014B</code>, <code>2014J</code>).</li>
+                        <li><strong>Variables Numéricas (2):</strong> Intentos previos en el módulo (<code>num_of_prev_attempts</code>, 0 a 6) y créditos matriculados (<code>studied_credits</code>, 30 a 655).</li>
+                        <li><strong>Variables Categóricas (8):</strong> Módulo, cohorte, género, región geográfica (13 regiones), nivel educativo previo (5 niveles), banda de privación socioeconómica (<code>imd_band</code>, 10 deciles), rango de edad y discapacidad declarada.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Sección 3: Metodología y Arquitectura -->
+    <section id="metodologia" class="section">
+        <div class="section-header">
+            <span class="section-tag">3. Rigor Metodológico y Prevención de Fuga de Información</span>
+            <h2>Metodología CRISP-ML(Q) y Pipeline Libre de Data Leakage</h2>
+            <p>
+                Todas las transformaciones estadísticas que aprenden parámetros se ajustan exclusivamente sobre el subconjunto de entrenamiento (<code>n = 26,074</code>).
+            </p>
+        </div>
+        <div class="grid-3">
+            <div class="card">
+                <h3>1️⃣ Ingesta y Partición Previa</h3>
+                <p>
+                    Limpieza de registros, exclusión de identificadores (<code>id_student</code>) y división estratificada 80/20 (<code>random_state=42</code>) <strong>antes</strong> de ejecutar cualquier imputación o codificación.
+                </p>
+            </div>
+            <div class="card">
+                <h3>2️⃣ Preprocesamiento en <code>ColumnTransformer</code></h3>
+                <p>
+                    Imputación de los <code>1,111</code> valores faltantes de <code>imd_band</code> mediante la moda de entrenamiento (<code>'20-30%'</code>), escalado <code>StandardScaler</code> para variables numéricas y <code>OneHotEncoder(drop='first', handle_unknown='ignore')</code> que genera <code>40</code> atributos transformados.
+                </p>
+            </div>
+            <div class="card">
+                <h3>3️⃣ Validación Multinivel</h3>
+                <p>
+                    Evaluación en conjunto de prueba retenido (<code>6,519</code> registros), validación cruzada estratificada de 5 pliegues (<code>StratifiedKFold</code>) y evaluación temporal inter-cohorte entrenando en <code>2013B–2014B</code> y probando en la cohorte futura <code>2014J</code>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 4: Hallazgos del Análisis Exploratorio de Datos (EDA) -->
+    <div class="section-alt">
+        <section id="eda" class="section">
+            <div class="section-header">
+                <span class="section-tag">4. Análisis Exploratorio de Datos (EDA)</span>
+                <h2>Principales Visualizaciones y Hallazgos Pedagógicos</h2>
+                <p>
+                    Gráficos generados con <code>Matplotlib</code> y <code>Seaborn</code> a partir de los <code>32,593</code> registros de <code>studentInfo.csv</code>.
+                </p>
+            </div>
+            <div class="grid-2">
+                <div class="figure-card">
+                    <img src="assets/img/fig1_distribucion_resultados.png" alt="Distribución de Resultados Académicos en OULAD">
+                    <div class="figure-caption">
+                        <h4>Figura 1. Distribución de Resultados Originales y Variable Objetivo Binaria</h4>
+                        <p>El 52.8% de las matrículas culminan en retiro (31.2%) o reprobación (21.6%), frente a un 47.2% de éxito académico (Pass 37.9% + Distinction 9.3%).</p>
+                    </div>
+                </div>
+                <div class="figure-card">
+                    <img src="assets/img/fig2_intentos_previos.png" alt="Impacto de los Intentos Previos en el Rendimiento">
+                    <div class="figure-caption">
+                        <h4>Figura 2. Impacto de los Intentos Previos (<code>num_of_prev_attempts</code>)</h4>
+                        <p>La tasa de éxito cae del 49.41% en estudiantes de primer intento al 33.59% con 1 intento previo y al 26.81% con 2 intentos previos.</p>
+                    </div>
+                </div>
+                <div class="figure-card">
+                    <img src="assets/img/fig3_creditos_educacion.png" alt="Créditos Matriculados y Nivel Educativo Previo">
+                    <div class="figure-caption">
+                        <h4>Figura 3. Créditos Estudiados y Nivel Educativo Previo</h4>
+                        <p>Cargas superiores a 120 créditos y niveles educativos inferiores a <em>A Level</em> (36.98% de éxito) o sin cualificación formal (30.55%) incrementan drásticamente el abandono.</p>
+                    </div>
+                </div>
+                <div class="figure-card">
+                    <img src="assets/img/fig4_correlacion_imd.png" alt="Correlación y Gradiente Socioeconómico IMD">
+                    <div class="figure-caption">
+                        <h4>Figura 4. Matriz de Correlación y Banda de Privación Socioeconómica (IMD)</h4>
+                        <p>Se evidencia una brecha socioeconómica superior a 22 puntos porcentuales entre el decil de mayor privación (0-10%: 35.6% de éxito) y el de menor privación (90-100%: 57.9%).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Sección 5: Evaluación y Comparación de Modelos -->
+    <section id="evaluacion" class="section">
+        <div class="section-header">
+            <span class="section-tag">5. Modelado y Evaluación Empírica</span>
+            <h2>Evaluación y Comparación de Modelos Supervisados</h2>
+            <p>
+                Resultados reales obtenidos sobre el conjunto de prueba independiente (<code>n = 6,519</code>) y validación cruzada de 5 pliegues.
+            </p>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modelo Supervisado</th>
+                        <th>Accuracy</th>
+                        <th>Balanced Accuracy</th>
+                        <th>Precision C0 (Riesgo)</th>
+                        <th>Recall C0 (Riesgo)</th>
+                        <th>F1-Score C0 (Riesgo)</th>
+                        <th>Precision C1 (Éxito)</th>
+                        <th>Recall C1 (Éxito)</th>
+                        <th>F1-Score C1 (Éxito)</th>
+                        <th>ROC-AUC (Prueba)</th>
+                        <th>CV 5-Fold ROC-AUC</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="highlight-row">
+                        <td><strong>Random Forest Classifier (Principal)</strong></td>
+                        <td>0.6194 (61.94%)</td>
+                        <td>0.6205 (62.05%)</td>
+                        <td>0.6512</td>
+                        <td>0.6011</td>
+                        <td>0.6252</td>
+                        <td>0.5892</td>
+                        <td>0.6399</td>
+                        <td>0.6135</td>
+                        <td><strong>0.6651</strong></td>
+                        <td>0.6594 ± 0.0046</td>
+                    </tr>
+                    <tr>
+                        <td>Logistic Regression (Comparativo Lineal)</td>
+                        <td>0.6237 (62.37%)</td>
+                        <td>0.6244 (62.44%)</td>
+                        <td>0.6531</td>
+                        <td>0.6127</td>
+                        <td>0.6323</td>
+                        <td>0.5948</td>
+                        <td>0.6360</td>
+                        <td>0.6147</td>
+                        <td>0.6698</td>
+                        <td>0.6644 ± 0.0037</td>
+                    </tr>
+                    <tr>
+                        <td>Decision Tree Classifier (Árbol Único)</td>
+                        <td>0.6082 (60.82%)</td>
+                        <td>0.6112 (61.12%)</td>
+                        <td>0.6505</td>
+                        <td>0.5575</td>
+                        <td>0.6004</td>
+                        <td>0.5733</td>
+                        <td>0.6649</td>
+                        <td>0.6157</td>
+                        <td>0.6418</td>
+                        <td>0.6386 ± 0.0024</td>
+                    </tr>
+                    <tr>
+                        <td><em>Evaluación Cohorte Temporal 2014J (RF)</em></td>
+                        <td><em>0.6141 (61.41%)</em></td>
+                        <td><em>0.6133 (61.33%)</em></td>
+                        <td><em>—</em></td>
+                        <td><em>—</em></td>
+                        <td><em>0.6312</em></td>
+                        <td><em>—</em></td>
+                        <td><em>—</em></td>
+                        <td><em>0.5954</em></td>
+                        <td><em>0.6550</em></td>
+                        <td><em>Train: 21,333 / Test: 11,260</em></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="grid-3" style="margin-top: 1.75rem;">
+            <div class="figure-card">
+                <img src="assets/img/fig5_matrices_confusion.png" alt="Matrices de Confusión">
+                <div class="figure-caption">
+                    <h4>Figura 5. Matrices de Confusión</h4>
+                    <p>Random Forest identifica correctamente 2,069 casos de fracaso/retiro (VN) y 1,969 casos de éxito (VP) en el conjunto de prueba.</p>
+                </div>
+            </div>
+            <div class="figure-card">
+                <img src="assets/img/fig6_curvas_roc.png" alt="Curvas ROC Comparativas">
+                <div class="figure-caption">
+                    <h4>Figura 6. Curvas ROC Comparativas</h4>
+                    <p>Tanto Random Forest (AUC = 0.6651) como Regresión Logística (AUC = 0.6698) superan significativamente al árbol de decisión único (AUC = 0.6418).</p>
+                </div>
+            </div>
+            <div class="figure-card">
+                <img src="assets/img/fig7_importancia_variables.png" alt="Importancia de Variables en Random Forest">
+                <div class="figure-caption">
+                    <h4>Figura 7. Importancia de Variables (Gini)</h4>
+                    <p><code>studied_credits</code> (16.78%), <code>highest_education_Lower Than A Level</code> (14.01%) y <code>num_of_prev_attempts</code> (8.03%) lideran el peso predictivo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 6: Simulador Inteligente y Motor de Reglas Pedagógicas -->
+    <div class="section-alt">
+        <section id="simulador" class="section">
+            <div class="section-header">
+                <span class="section-tag">6. Simulador Interactivo y Prescripción Docente</span>
+                <h2>Simulador Inteligente y Motor de Reglas Pedagógicas</h2>
+                <p>
+                    Explore aquí una vista previa interactiva del motor de reglas pedagógicas o ejecute la aplicación completa en Streamlit (<code>streamlit run app.py</code>).
+                </p>
+            </div>
+
+            <div class="sim-box">
+                <div class="sim-controls">
+                    <div class="form-group">
+                        <label for="sim-preset">Escenario de Referencia:</label>
+                        <select id="sim-preset">
+                            <option value="high">Escenario 1: Riesgo Alto (Reintentos + Sobrecarga)</option>
+                            <option value="medium">Escenario 2: Riesgo Moderado (Zona de Incertidumbre)</option>
+                            <option value="low">Escenario 3: Pronóstico Favorable (Carga Estándar)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sim-attempts">Intentos Previos (0 - 6):</label>
+                        <input type="number" id="sim-attempts" min="0" max="6" value="2">
+                    </div>
+                    <div class="form-group">
+                        <label for="sim-credits">Créditos Matriculados (30 - 655):</label>
+                        <input type="number" id="sim-credits" min="30" max="655" step="30" value="120">
+                    </div>
+                    <div class="form-group">
+                        <label for="sim-education">Nivel Educativo Previo:</label>
+                        <select id="sim-education">
+                            <option value="Lower Than A Level" selected>Lower Than A Level</option>
+                            <option value="No Formal quals">No Formal quals</option>
+                            <option value="A Level or Equivalent">A Level or Equivalent</option>
+                            <option value="HE Qualification">HE Qualification</option>
+                            <option value="Post Graduate Qualification">Post Graduate Qualification</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sim-imd">Banda Socioeconómica (IMD):</label>
+                        <select id="sim-imd">
+                            <option value="0-10%" selected>0-10% (Mayor privación)</option>
+                            <option value="10-20%">10-20%</option>
+                            <option value="30-40%">30-40%</option>
+                            <option value="80-90%">80-90%</option>
+                            <option value="90-100%">90-100% (Menor privación)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sim-disability">Discapacidad Declarada:</label>
+                        <select id="sim-disability">
+                            <option value="Y" selected>Sí (Y)</option>
+                            <option value="N">No (N)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="btn-sim-eval" class="btn btn-primary" style="margin-bottom: 1.25rem;">
+                    ⚡ Calcular Estimación y Reglas Pedagógicas Activadas
+                </button>
+
+                <div class="sim-output">
+                    <h4 id="sim-out-badge" style="font-size: 1.1rem; margin-bottom: 0.5rem;"></h4>
+                    <p style="margin-bottom: 0.75rem;">
+                        <strong>Probabilidad Estimada de Fracaso/Retiro (Clase 0):</strong> <span id="sim-out-fail"></span> &nbsp;|&nbsp;
+                        <strong>Probabilidad Estimada de Éxito (Clase 1):</strong> <span id="sim-out-pass"></span>
+                    </p>
+                    <h4 style="color: var(--primary); font-size: 0.98rem; margin-bottom: 0.4rem;">
+                        Reglas Explícitas Activadas por el Motor Pedagógico:
+                    </h4>
+                    <ul id="sim-out-rules" style="padding-left: 1.25rem; font-size: 0.92rem; color: var(--text-main);"></ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Sección 7: Consideraciones Éticas, Limitaciones y Enlaces -->
+    <section id="etica" class="section">
+        <div class="section-header">
+            <span class="section-tag">7. Gobernanza, Ética y Recursos del Proyecto</span>
+            <h2>Consideraciones Éticas, Limitaciones y Enlaces de Acceso</h2>
+            <p>
+                Uso responsable de la inteligencia artificial en contextos educativos universitarios.
+            </p>
+        </div>
+
+        <div class="ethical-alert">
+            <strong>⚖️ Aviso Ético Obligatorio sobre Incertidumbre Predictiva:</strong>
+            Las predicciones generadas por este sistema constituyen estimaciones estadísticas probabilísticas sujetas a incertidumbre (<code>Accuracy = 61.94%</code>, <code>ROC-AUC = 0.6651</code> empleando variables iniciales de matrícula) y <strong>en ningún caso representan diagnósticos definitivos, etiquetas permanentes ni decisiones automáticas sobre los estudiantes</strong>. El propósito exclusivo de la herramienta es orientar la planificación docente preventiva y el acompañamiento pedagógico humano.
+        </div>
+
+        <div class="grid-3" style="margin-top: 1.75rem;">
+            <div class="card">
+                <h3>📂 Repositorio y Cuaderno</h3>
+                <p>Acceda al código fuente modular, al cuaderno Jupyter definitivo ejecutado (11 etapas) y a los modelos entrenados.</p>
+                <ul style="margin-top: 0.6rem;">
+                    <li><a href="https://github.com/JhessikaEspaillat/Proyecto_ML_Planificacion_Docente" target="_blank" rel="noopener noreferrer">Repositorio GitHub del Proyecto</a></li>
+                    <li><a href="Proyecto_ML_JE_AEI.ipynb" target="_blank">Cuaderno <code>Proyecto_ML_JE_AEI.ipynb</code></a></li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>🚀 Aplicación Web Streamlit</h3>
+                <p>Simulador interactivo completo conectado en vivo al pipeline serializado <code>random_forest_oulad.joblib</code>.</p>
+                <ul style="margin-top: 0.6rem;">
+                    <li>Ejecución local: <code>streamlit run app.py</code></li>
+                    <li><a href="app.py" target="_blank">Ver código fuente de <code>app.py</code></a></li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>📘 Documentación y Video</h3>
+                <p>Documentación técnica CRISP-ML(Q), registros ADR, informe institucional Word y presentación en video narrada en español.</p>
+                <ul style="margin-top: 0.6rem;">
+                    <li><a href="docs/CRISP_ML_Documentation.md" target="_blank">Documentación Técnica CRISP-ML</a></li>
+                    <li><a href="video/presentacion_interactiva_video.html" target="_blank">Video Presentación Interactiva (Español)</a></li>
+                    <li><a href="video/guion_video_espanol.md" target="_blank">Guion Completo del Video</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de Página Institucional -->
+    <footer>
+        <p><strong>Universidad Federico Henríquez y Carvajal (UFHEC)</strong> · Maestría en Inteligencia Artificial Aplicada a la Educación e Investigación</p>
+        <p>Asignatura: Aprendizaje Automático (<code>IAE-2501</code>) · Docente: <strong>Mtro. Feibert Guzmán</strong> · Autora: <strong>Jhessika Lidabed Espaillat Espaillat</strong></p>
+        <p style="margin-top: 0.5rem; font-size: 0.82rem;">Dataset de referencia: Kuzilek, J., Hlosta, M., &amp; Zdrahal, Z. (2017). <em>Open University Learning Analytics dataset</em>. Scientific Data, 4, 170171.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
+
