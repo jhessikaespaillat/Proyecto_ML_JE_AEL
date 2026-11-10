@@ -184,6 +184,15 @@ Evaluación verificada sobre el conjunto de prueba independiente (`n = 6,519` es
 
 ## 🔗 8. Enlaces del Proyecto
 
+
+### 🎬 Presentación Interactiva con Narración en Español
+
+Accede a la presentación audiovisual del proyecto **Asistente de Inteligencia Artificial para la Planificación Docente**, organizada en siete bloques temáticos y con narración en español.
+
+▶️ [Ver presentación interactiva del proyecto](https://jhessikaespaillat.github.io/Proyecto_ML_JE_AEL/presentacion_interactiva_video.html)
+
+**Nota:** Para escuchar la narración, selecciona el botón «Reproducir con Narración en Español» dentro de la presentación.
+  
 - **Landing Page (GitHub Pages):** [`index.html`](file:///index.html) *(Desplegable en `https://jhessikaespaillat.github.io/Proyecto_ML_Planificacion_Docente/`)*
 - **Repositorio GitHub:** `https://github.com/JhessikaEspaillat/Proyecto_ML_Planificacion_Docente`
 - **Aplicación Web Streamlit:** [`app.py`](file:///app.py)
