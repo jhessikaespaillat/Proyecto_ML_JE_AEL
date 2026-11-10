@@ -185,18 +185,33 @@ Evaluación verificada sobre el conjunto de prueba independiente (`n = 6,519` es
 ## 🔗 8. Enlaces del Proyecto
 
 
+### 🌐 Página web del proyecto
+
+[Ver Landing Page en GitHub Pages](https://jhessikaespaillat.github.io/Proyecto_ML_JE_AEL/)
+
 ### 🎬 Presentación interactiva con narración en español
 
-[▶️ Ver presentación interactiva del proyecto](https://jhessikaespaillat.github.io/Proyecto_ML_JE_AEL/presentacion_interactiva_video.html)
-  
+[▶️ REPRODUCIR PRESENTACIÓN DEL PROYECTO](https://jhessikaespaillat.github.io/Proyecto_ML_JE_AEL/presentacion_interactiva_video.html)
 
-**Nota:** Para escuchar la narración, selecciona el botón «Reproducir con Narración en Español» dentro de la presentación.
-  
-- **Landing Page (GitHub Pages):** [`index.html`](file:///index.html) *(Desplegable en `https://jhessikaespaillat.github.io/Proyecto_ML_Planificacion_Docente/`)*
-- **Repositorio GitHub:** `https://github.com/JhessikaEspaillat/Proyecto_ML_Planificacion_Docente`
-- **Aplicación Web Streamlit:** [`app.py`](file:///app.py)
-- **Documentación Técnica CRISP-ML(Q):** [`docs/CRISP_ML_Documentation.md`](file:///docs/CRISP_ML_Documentation.md)
-- **Guion y Presentación de Video en Español:** [`video/guion_video_espanol.md`](file:///video/guion_video_espanol.md) y [`video/presentacion_interactiva_video.html`](file:///video/presentacion_interactiva_video.html)
+**Nota:** Al abrir la presentación, selecciona el botón
+"Reproducir con Narración en Español" para escuchar la explicación.
+
+### 📂 Repositorio GitHub
+
+[Ver repositorio del proyecto](https://github.com/jhessikaespaillat/Proyecto_ML_JE_AEL)
+
+### 💻 Aplicación de Machine Learning
+
+La aplicación Streamlit está pendiente de confirmar su URL pública.
+
+### 📄 Documentación académica
+
+[Consultar cuaderno Jupyter](Proyecto_ML_JE_AEI.ipynb)
+
+### 📝 Guion del video
+
+[Consultar guion en español](guion_video_espanol.md)
+
 
 ---
 
