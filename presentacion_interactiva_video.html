@@ -47,6 +47,7 @@
             display: flex;
             gap: 0.65rem;
             align-items: center;
+            flex-wrap: wrap;
         }
         button {
             background-color: var(--accent);
@@ -150,6 +151,20 @@
             width: 14.28%;
             transition: width 0.3s ease;
         }
+        .image-fallback {
+            margin-top: 1.1rem;
+            border: 1px dashed rgba(245,158,11,0.5);
+            padding: 1rem;
+            border-radius: 8px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .playback-status {
+            padding: 0.35rem 1.5rem;
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
         @media (max-width: 900px) {
             main { grid-template-columns: 1fr; }
         }
@@ -168,13 +183,16 @@
         </div>
     </header>
 
+    <div id="playback-status" class="playback-status" role="status" aria-live="polite">Lista para reproducir. Pulsa «Reproducir con Narración en Español».</div>
+
     <main>
         <section class="slide-stage">
             <div>
                 <span class="slide-badge" id="st-time">Bloque 1 de 7 (00:00 - 00:45)</span>
                 <h1 class="slide-title" id="st-title">Cargando presentación...</h1>
                 <div class="slide-body" id="st-body"></div>
-                <img id="st-img" class="slide-img" src="../assets/img/fig1_distribucion_resultados.png" alt="Visualización del proyecto">
+                <img id="st-img" class="slide-img" src="assets/img/fig1_distribucion_resultados.png" alt="Visualización del proyecto">
+                <div id="image-fallback" class="image-fallback" hidden>La imagen de esta diapositiva no está disponible en el sitio publicado. El contenido académico y la narración siguen disponibles.</div>
             </div>
             <div>
                 <div class="progress-bar">
@@ -200,7 +218,7 @@
                     <li><strong>Institución:</strong> Universidad Federico Henríquez y Carvajal (UFHEC)</li>
                     <li><strong>Problema abordado:</strong> La detección tradicional del fracaso o retiro universitario es reactiva. Se requiere un sistema predictivo que asista al docente desde la matrícula inicial para planificar acompañamientos preventivos.</li>
                 </ul>`,
-                img: "../assets/img/fig1_distribucion_resultados.png",
+                img: "assets/img/fig1_distribucion_resultados.png",
                 narration: "Un cordial saludo al docente Feibert Guzmán y a la comunidad académica de la Universidad Federico Henríquez y Carvajal, UFHEC. Mi nombre es Jhessika Lidabed Espaillat Espaillat, participante de la Maestría en Inteligencia Artificial Aplicada a la Educación e Investigación, y presento el proyecto final de la asignatura Aprendizaje Automático: Asistente de Inteligencia Artificial para la Planificación Docente. En la educación superior, la detección de estudiantes en riesgo suele ocurrir de forma tardía. Nuestro proyecto transforma los datos históricos de matrícula en alertas preventivas para planificar tutorías y recursos antes de que el fracaso sea irreversible."
             },
             {
@@ -212,7 +230,7 @@
                     <li><strong>Clase 1 (Éxito Académico — Pass / Distinction):</strong> 15,385 estudiantes (<strong>47.21%</strong>).</li>
                     <li><strong>10 Variables Predictoras:</strong> 2 numéricas (<code>num_of_prev_attempts</code>, <code>studied_credits</code>) y 8 categóricas (módulo, cohorte, género, región, escolaridad previa, banda socioeconómica IMD, edad y discapacidad).</li>
                 </ul>`,
-                img: "../assets/img/fig2_intentos_previos.png",
+                img: "assets/img/fig2_intentos_previos.png",
                 narration: "Utilizamos el conjunto de datos abierto Open University Learning Analytics Dataset, OULAD, específicamente la tabla maestra studentInfo con 32,593 registros. Formulamos una clasificación binaria donde la Clase 0 agrupa el fracaso académico o retiro, con el 52.79 por ciento de los casos, y la Clase 1 representa el éxito académico, con el 47.21 por ciento. Empleamos diez variables predictoras sociodemográficas y de matrícula disponibles desde el primer día de clases."
             },
             {
@@ -223,7 +241,7 @@
                     <li><strong>Calidad auditada con YData Profiling:</strong> 1,111 faltantes únicamente en <code>imd_band</code> (3.41%), 0 duplicados.</li>
                     <li><strong>Hallazgos del EDA:</strong> A partir de 2 intentos previos la aprobación cae por debajo del 34%; la mayor privación socioeconómica (IMD 0-20%) y la sobrecarga de créditos elevan sustancialmente el abandono.</li>
                 </ul>`,
-                img: "../assets/img/fig3_creditos_educacion.png",
+                img: "assets/img/fig3_creditos_educacion.png",
                 narration: "Implementamos un pipeline libre de fuga de información. Dividimos primero los datos en 26,074 registros de entrenamiento y 6,519 de prueba, ajustando la imputación y la codificación One-Hot exclusivamente con los datos de entrenamiento. El análisis exploratorio y el reporte de YData Profiling demostraron que tener intentos fallidos previos, cursar más de 120 créditos simultáneos o provenir de entornos de mayor vulnerabilidad socioeconómica incrementan significativamente el riesgo de retiro."
             },
             {
@@ -234,7 +252,7 @@
                     <li><strong>Métricas en Prueba (n = 6,519):</strong> ROC-AUC de <strong>0.680</strong>, Accuracy de <strong>63.6%</strong>, Balanced Accuracy de <strong>63.6%</strong> y sensibilidad (Recall) de <strong>61.8%</strong> en la detección de la Clase 0 (riesgo).</li>
                     <li><strong>Estabilidad:</strong> Validación Cruzada 5-Fold (ROC-AUC 0.679) y validación temporal en la cohorte independiente <code>2014J</code>.</li>
                 </ul>`,
-                img: "../assets/img/fig6_curvas_roc.png",
+                img: "assets/img/fig6_curvas_roc.png",
                 narration: "Entrenamos como modelo principal un Random Forest Classifier y lo comparamos contra Regresión Logística y Árbol de Decisión. En el conjunto de prueba de 6,519 estudiantes, Random Forest obtuvo el mejor desempeño con un área bajo la curva ROC de 0.680, una exactitud de 63.6 por ciento y una sensibilidad superior al 61.8 por ciento para detectar estudiantes en riesgo de fracaso o retiro, manteniendo su estabilidad tanto en validación cruzada de cinco pliegues como en la cohorte futura 2014J."
             },
             {
@@ -245,7 +263,7 @@
                     <li><strong>Pestaña 2 (Simulador Inteligente):</strong> Selector de escenarios preconfigurados y formulario validado para las 10 características del estudiante.</li>
                     <li><strong>Inferencia Consistente:</strong> Transformación directa mediante el pipeline serializado sin asignar ceros arbitrarios.</li>
                 </ul>`,
-                img: "../assets/img/fig5_matrices_confusion.png",
+                img: "assets/img/fig5_matrices_confusion.png",
                 narration: "Desarrollamos una aplicación modular en Streamlit con dos pestañas. La primera presenta el análisis exploratorio y la evaluación comparativa de los modelos. La segunda pestaña contiene el Simulador Inteligente de Planificación Docente, donde el profesor puede cargar escenarios de prueba o introducir las diez características de un estudiante para obtener en tiempo real la clase estimada y las probabilidades de fracaso y éxito."
             },
             {
@@ -255,7 +273,7 @@
                     <li><strong>Separación Arquitectónica:</strong> El modelo estima la probabilidad estadística; un motor determinista audita las reglas pedagógicas en 7 dimensiones:</li>
                     <li>1. Tutorías individuales | 2. Actividades de refuerzo | 3. Recursos complementarios (DUA) | 4. Evaluaciones formativas | 5. Retroalimentación personalizada | 6. Seguimiento de participación | 7. Ajustes en la planificación docente.</li>
                 </ul>`,
-                img: "../assets/img/fig7_importancia_variables.png",
+                img: "assets/img/fig7_importancia_variables.png",
                 narration: "Nuestro diseño distingue claramente entre la predicción probabilística del modelo y las recomendaciones pedagógicas basadas en reglas explícitas. Ante un perfil con sobrecarga de créditos e intentos previos, el motor activa recomendaciones específicas en siete dimensiones docentes: tutorías quincenales, actividades de refuerzo propedéutico, recursos accesibles bajo Diseño Universal para el Aprendizaje, evaluaciones formativas semanales, retroalimentación temprana, seguimiento de participación y ajuste de carga crediticia."
             },
             {
@@ -266,65 +284,200 @@
                     <li><strong>Limitación y Mejora Futura:</strong> Integrar registros semanales del entorno virtual (<code>studentVle.csv</code>) y notas parciales para incrementar el poder predictivo intra-semestral.</li>
                     <li><strong>Compromiso Ético:</strong> Toda predicción es una estimación orientativa sujeta a incertidumbre y jamás sustituye el juicio pedagógico del docente.</li>
                 </ul>`,
-                img: "../assets/img/fig4_correlacion_imd.png",
+                img: "assets/img/fig4_correlacion_imd.png",
                 narration: "En conclusión, este prototipo demuestra el valor de la inteligencia artificial como aliada de la planificación docente preventiva. Como mejora futura se contempla integrar la actividad semanal en el entorno virtual para refinar las predicciones durante el semestre. Reafirmamos finalmente nuestro compromiso ético: ninguna predicción es un diagnóstico definitivo ni una sentencia sobre el estudiante, sino una orientación preventiva al servicio de una educación más humana e inclusiva. Muchas gracias."
             }
         ];
 
         let currentIdx = 0;
         let autoPlaying = false;
+        let sessionId = 0;
+        let activeUtterance = null;
+        let speechWatchdog = null;
+        let speechNextTimer = null;
+        let spanishVoice = null;
+
+        const statusElement = document.getElementById("playback-status");
+        const slideImage = document.getElementById("st-img");
+        const imageFallback = document.getElementById("image-fallback");
+        const synthAvailable = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+
+        function setStatus(message) {
+            statusElement.textContent = message;
+        }
+
+        function updateImage(source) {
+            imageFallback.hidden = true;
+            slideImage.hidden = false;
+            // Image errors must not interrupt narration or slide progression.
+            slideImage.src = source;
+        }
+        slideImage.addEventListener("error", () => {
+            slideImage.hidden = true;
+            imageFallback.hidden = false;
+        });
+        slideImage.addEventListener("load", () => {
+            slideImage.hidden = false;
+            imageFallback.hidden = true;
+        });
 
         function renderSlide(idx) {
             const s = slides[idx];
             document.getElementById("st-time").textContent = s.time;
             document.getElementById("st-title").textContent = s.title;
             document.getElementById("st-body").innerHTML = s.body;
-            document.getElementById("st-img").src = s.img;
+            updateImage(s.img);
             document.getElementById("st-narration").textContent = s.narration;
             document.getElementById("st-prog").style.width = (((idx + 1) / slides.length) * 100).toFixed(1) + "%";
         }
 
-        function speakCurrentSlide() {
-            if (!("speechSynthesis" in window)) return;
-            window.speechSynthesis.cancel();
-            const utter = new SpeechSynthesisUtterance(slides[currentIdx].narration);
-            utter.lang = "es-ES";
-            utter.rate = 1.02;
-            utter.onend = () => {
-                if (autoPlaying && currentIdx < slides.length - 1) {
-                    currentIdx++;
-                    renderSlide(currentIdx);
-                    speakCurrentSlide();
-                } else {
-                    autoPlaying = false;
+        function clearSpeechTimers() {
+            if (speechWatchdog !== null) clearTimeout(speechWatchdog);
+            if (speechNextTimer !== null) clearTimeout(speechNextTimer);
+            speechWatchdog = null;
+            speechNextTimer = null;
+        }
+
+        function stopPlayback(message = "Reproducción detenida.") {
+            autoPlaying = false;
+            sessionId++;
+            clearSpeechTimers();
+            if (activeUtterance) {
+                activeUtterance.onend = null;
+                activeUtterance.onerror = null;
+                activeUtterance = null;
+            }
+            if (synthAvailable) window.speechSynthesis.cancel();
+            setStatus(message);
+        }
+
+        function selectSpanishVoice() {
+            if (!synthAvailable) return;
+            const voices = window.speechSynthesis.getVoices();
+            spanishVoice = voices.find(v => /^es(-|_)/i.test(v.lang) && v.localService) ||
+                           voices.find(v => /^es(-|_)/i.test(v.lang)) || null;
+        }
+        if (synthAvailable) {
+            selectSpanishVoice();
+            window.speechSynthesis.addEventListener?.("voiceschanged", selectSpanishVoice);
+        }
+
+        // Short segments avoid a common Chrome/Web Speech issue with long utterances.
+        // Narration content remains unchanged; it is only split for playback.
+        function splitNarration(text, maxChars = 155) {
+            const sentences = text.match(/[^.!?;]+[.!?;]*\s*/g) || [text];
+            const parts = [];
+            let buffer = "";
+            for (const sentence of sentences) {
+                const words = sentence.trim().split(/\s+/);
+                for (const word of words) {
+                    if (buffer && (buffer.length + word.length + 1 > maxChars)) {
+                        parts.push(buffer.trim());
+                        buffer = "";
+                    }
+                    buffer += (buffer ? " " : "") + word;
                 }
-            };
-            window.speechSynthesis.speak(utter);
+            }
+            if (buffer.trim()) parts.push(buffer.trim());
+            return parts;
+        }
+
+        function advanceAutomatically(token) {
+            if (!autoPlaying || token !== sessionId) return;
+            if (currentIdx < slides.length - 1) {
+                currentIdx++;
+                renderSlide(currentIdx);
+                // Brief pause between slides. No user interaction is required.
+                speechNextTimer = setTimeout(() => speakCurrentSlide(token), 350);
+            } else {
+                stopPlayback("Presentación finalizada: se reprodujeron los 7 bloques.");
+            }
+        }
+
+        function speakCurrentSlide(token) {
+            if (!autoPlaying || token !== sessionId) return;
+            const segments = splitNarration(slides[currentIdx].narration);
+            let segmentIdx = 0;
+            setStatus(`Reproduciendo bloque ${currentIdx + 1} de ${slides.length} automáticamente…`);
+
+            function speakSegment() {
+                if (!autoPlaying || token !== sessionId) return;
+                if (segmentIdx >= segments.length) {
+                    advanceAutomatically(token);
+                    return;
+                }
+                const segment = segments[segmentIdx];
+                const utter = new SpeechSynthesisUtterance(segment);
+                utter.lang = spanishVoice?.lang || "es-ES";
+                if (spanishVoice) utter.voice = spanishVoice;
+                utter.rate = 1.02;
+                activeUtterance = utter;
+                let completed = false;
+
+                function finishSegment() {
+                    if (completed || !autoPlaying || token !== sessionId) return;
+                    completed = true;
+                    if (speechWatchdog !== null) clearTimeout(speechWatchdog);
+                    speechWatchdog = null;
+                    activeUtterance = null;
+                    segmentIdx++;
+                    speechNextTimer = setTimeout(speakSegment, 90);
+                }
+
+                utter.onend = finishSegment;
+                utter.onerror = (event) => {
+                    if (!autoPlaying || token !== sessionId) return;
+                    // A cancelled utterance is not an error when Stop/Next was pressed.
+                    if (event.error === "canceled" || event.error === "interrupted") return;
+                    setStatus(`La voz encontró un problema (${event.error || "desconocido"}). Intentando continuar…`);
+                    finishSegment();
+                };
+
+                // Recovery for browsers that never fire onend. Prevents a frozen slide.
+                // It is a safety timeout, not an exact audio synchronizer.
+                const estimatedMs = Math.max(10000, Math.ceil(segment.length / 10) * 1000 + 7000);
+                speechWatchdog = setTimeout(() => {
+                    if (completed || !autoPlaying || token !== sessionId) return;
+                    utter.onend = null;
+                    utter.onerror = null;
+                    window.speechSynthesis.cancel();
+                    setStatus("El navegador interrumpió la voz; continuando la presentación automáticamente…");
+                    finishSegment();
+                }, estimatedMs);
+                try {
+                    window.speechSynthesis.speak(utter);
+                } catch (error) {
+                    stopPlayback("No se pudo iniciar la narración. Prueba Chrome o Edge y habilita el sonido.");
+                }
+            }
+            speakSegment();
         }
 
         document.getElementById("btn-prev").addEventListener("click", () => {
-            autoPlaying = false;
-            if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+            stopPlayback("Navegación manual: bloque anterior.");
             currentIdx = (currentIdx - 1 + slides.length) % slides.length;
             renderSlide(currentIdx);
         });
-
         document.getElementById("btn-next").addEventListener("click", () => {
-            autoPlaying = false;
-            if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+            stopPlayback("Navegación manual: bloque siguiente.");
             currentIdx = (currentIdx + 1) % slides.length;
             renderSlide(currentIdx);
         });
-
         document.getElementById("btn-play").addEventListener("click", () => {
+            if (!synthAvailable) {
+                setStatus("Este navegador no admite narración de voz. Usa Chrome o Edge actualizado.");
+                return;
+            }
+            stopPlayback("");
             autoPlaying = true;
-            speakCurrentSlide();
+            const token = sessionId;
+            selectSpanishVoice();
+            speakCurrentSlide(token);
         });
-
         document.getElementById("btn-stop").addEventListener("click", () => {
-            autoPlaying = false;
-            if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+            stopPlayback();
         });
+        window.addEventListener("pagehide", () => stopPlayback(""));
 
         renderSlide(0);
     </script>
