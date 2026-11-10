@@ -1,0 +1,43 @@
+# =============================================================================
+# .gitignore - Proyecto Final de Machine Learning (UFHEC - IAE-2501)
+# Asistente de Inteligencia Artificial para la Planificación Docente
+# =============================================================================
+
+# Entornos virtuales de Python
+.venv/
+venv/
+env/
+ENV/
+
+# Caché de Python y compilados
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Puntos de control de Jupyter Notebook
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Archivos temporales de Office / Word
+~$*.docx
+~$*.dotx
+~$*.xlsx
+
+# Archivos comprimidos pesados o copias locales innecesarias en Git
+archive.zip
+archive - copia.zip
+*.tmp
+*.bak
+*.log
+
+# Configuración local de IDEs y sistema operativo
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Secretos locales de Streamlit (si se utilizan)
+.streamlit/secrets.toml
+
