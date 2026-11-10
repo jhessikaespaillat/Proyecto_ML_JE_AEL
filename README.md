@@ -185,6 +185,11 @@ Evaluación verificada sobre el conjunto de prueba independiente (`n = 6,519` es
 ## 🔗 8. Enlaces del Proyecto
 
 
+### 🎬 Presentación interactiva con narración en español
+
+[▶️ Ver presentación del proyecto](https://jhessikaespaillat.github.io/Proyecto_ML_JE_AEL/presentacion_interactiva_video.html)
+
+
 ### 🎬 Presentación Interactiva con Narración en Español
 
 Accede a la presentación audiovisual del proyecto **Asistente de Inteligencia Artificial para la Planificación Docente**, organizada en siete bloques temáticos y con narración en español.
