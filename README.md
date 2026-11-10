@@ -200,9 +200,11 @@ Evaluación verificada sobre el conjunto de prueba independiente (`n = 6,519` es
 
 [Ver repositorio del proyecto](https://github.com/jhessikaespaillat/Proyecto_ML_JE_AEL)
 
-### 💻 Aplicación de Machine Learning
 
-La aplicación Streamlit está pendiente de confirmar su URL pública.
+### 💻 Aplicación de Machine Learning en Streamlit
+
+[🚀 Acceder al Asistente de IA para la Planificación Docente](https://proyecto-ml-je-ael.streamlit.app/)
+
 
 ### 📄 Documentación académica
 
