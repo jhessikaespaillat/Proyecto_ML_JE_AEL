@@ -1,0 +1,487 @@
+{
+  "dataset_summary": {
+    "name": "Open University Learning Analytics Dataset (OULAD) - studentInfo.csv",
+    "total_rows": 32593,
+    "total_columns": 12,
+    "train_rows": 26074,
+    "test_rows": 6519,
+    "encoded_features_count": 40,
+    "missing_values": {
+      "code_module": 0,
+      "code_presentation": 0,
+      "id_student": 0,
+      "gender": 0,
+      "region": 0,
+      "highest_education": 0,
+      "imd_band": 1111,
+      "age_band": 0,
+      "num_of_prev_attempts": 0,
+      "studied_credits": 0,
+      "disability": 0,
+      "final_result": 0
+    },
+    "final_result_distribution": {
+      "Pass": 12361,
+      "Withdrawn": 10156,
+      "Fail": 7052,
+      "Distinction": 3024
+    },
+    "target_distribution": {
+      "0_fracaso_retiro": 17208,
+      "1_exito_academico": 15385,
+      "pct_0_fracaso_retiro": 52.8,
+      "pct_1_exito_academico": 47.2
+    },
+    "other_oulad_tables": {
+      "courses.csv": [
+        22,
+        3
+      ],
+      "assessments.csv": [
+        206,
+        6
+      ],
+      "studentRegistration.csv": [
+        32593,
+        5
+      ],
+      "vle.csv": [
+        6364,
+        6
+      ]
+    }
+  },
+  "models_evaluation": {
+    "Random Forest": {
+      "test_metrics": {
+        "accuracy": 0.6194,
+        "balanced_accuracy": 0.6205,
+        "roc_auc": 0.6651,
+        "precision_class_0_fracaso": 0.6512,
+        "recall_class_0_fracaso": 0.6011,
+        "f1_class_0_fracaso": 0.6252,
+        "precision_class_1_exito": 0.5892,
+        "recall_class_1_exito": 0.6399,
+        "f1_class_1_exito": 0.6135,
+        " precision_macro": 0.6202,
+        "recall_macro": 0.6205,
+        "f1_macro": 0.6193
+      },
+      "cv_5fold": {
+        "accuracy": {
+          "mean": 0.6173,
+          "std": 0.0047
+        },
+        "precision": {
+          "mean": 0.5882,
+          "std": 0.0047
+        },
+        "recall": {
+          "mean": 0.6311,
+          "std": 0.0067
+        },
+        "f1": {
+          "mean": 0.6089,
+          "std": 0.005
+        },
+        "balanced_accuracy": {
+          "mean": 0.6181,
+          "std": 0.0047
+        },
+        "roc_auc": {
+          "mean": 0.6594,
+          "std": 0.0046
+        }
+      },
+      "confusion_matrix": [
+        [
+          2069,
+          1373
+        ],
+        [
+          1108,
+          1969
+        ]
+      ],
+      "classification_report": {
+        "Fracaso/Retiro (0)": {
+          "precision": 0.6512433112999685,
+          "recall": 0.6011040092969204,
+          "f1-score": 0.6251699652515486,
+          "support": 3442.0
+        },
+        "Éxito Académico (1)": {
+          "precision": 0.5891681627767804,
+          "recall": 0.6399090022749431,
+          "f1-score": 0.6134911980059199,
+          "support": 3077.0
+        },
+        "accuracy": 0.6194201564657156,
+        "macro avg": {
+          "precision": 0.6202057370383744,
+          "recall": 0.6205065057859318,
+          "f1-score": 0.6193305816287342,
+          "support": 6519.0
+        },
+        "weighted avg": {
+          "precision": 0.6219435364869834,
+          "recall": 0.6194201564657156,
+          "f1-score": 0.6196575297837161,
+          "support": 6519.0
+        }
+      }
+    },
+    "Logistic Regression": {
+      "test_metrics": {
+        "accuracy": 0.6237,
+        "balanced_accuracy": 0.6244,
+        "roc_auc": 0.6698,
+        "precision_class_0_fracaso": 0.6531,
+        "recall_class_0_fracaso": 0.6127,
+        "f1_class_0_fracaso": 0.6323,
+        "precision_class_1_exito": 0.5948,
+        "recall_class_1_exito": 0.636,
+        "f1_class_1_exito": 0.6147,
+        " precision_macro": 0.624,
+        "recall_macro": 0.6244,
+        "f1_macro": 0.6235
+      },
+      "cv_5fold": {
+        "accuracy": {
+          "mean": 0.6189,
+          "std": 0.0045
+        },
+        "precision": {
+          "mean": 0.5893,
+          "std": 0.0048
+        },
+        "recall": {
+          "mean": 0.6359,
+          "std": 0.0048
+        },
+        "f1": {
+          "mean": 0.6117,
+          "std": 0.0039
+        },
+        "balanced_accuracy": {
+          "mean": 0.6198,
+          "std": 0.0043
+        },
+        "roc_auc": {
+          "mean": 0.6644,
+          "std": 0.0037
+        }
+      },
+      "confusion_matrix": [
+        [
+          2109,
+          1333
+        ],
+        [
+          1120,
+          1957
+        ]
+      ],
+      "classification_report": {
+        "Fracaso/Retiro (0)": {
+          "precision": 0.6531433880458346,
+          "recall": 0.6127251597908193,
+          "f1-score": 0.6322890121421076,
+          "support": 3442.0
+        },
+        "Éxito Académico (1)": {
+          "precision": 0.5948328267477203,
+          "recall": 0.6360090997725056,
+          "f1-score": 0.6147322129731427,
+          "support": 3077.0
+        },
+        "accuracy": 0.6237152937567112,
+        "macro avg": {
+          "precision": 0.6239881073967775,
+          "recall": 0.6243671297816624,
+          "f1-score": 0.6235106125576252,
+          "support": 6519.0
+        },
+        "weighted avg": {
+          "precision": 0.6256205168824203,
+          "recall": 0.6237152937567112,
+          "f1-score": 0.6240021167527987,
+          "support": 6519.0
+        }
+      }
+    },
+    "Decision Tree": {
+      "test_metrics": {
+        "accuracy": 0.6082,
+        "balanced_accuracy": 0.6112,
+        "roc_auc": 0.6418,
+        "precision_class_0_fracaso": 0.6505,
+        "recall_class_0_fracaso": 0.5575,
+        "f1_class_0_fracaso": 0.6004,
+        "precision_class_1_exito": 0.5733,
+        "recall_class_1_exito": 0.6649,
+        "f1_class_1_exito": 0.6157,
+        " precision_macro": 0.6119,
+        "recall_macro": 0.6112,
+        "f1_macro": 0.6081
+      },
+      "cv_5fold": {
+        "accuracy": {
+          "mean": 0.6082,
+          "std": 0.0046
+        },
+        "precision": {
+          "mean": 0.5745,
+          "std": 0.0057
+        },
+        "recall": {
+          "mean": 0.656,
+          "std": 0.0116
+        },
+        "f1": {
+          "mean": 0.6125,
+          "std": 0.0039
+        },
+        "balanced_accuracy": {
+          "mean": 0.6107,
+          "std": 0.0042
+        },
+        "roc_auc": {
+          "mean": 0.6386,
+          "std": 0.0024
+        }
+      },
+      "confusion_matrix": [
+        [
+          1919,
+          1523
+        ],
+        [
+          1031,
+          2046
+        ]
+      ],
+      "classification_report": {
+        "Fracaso/Retiro (0)": {
+          "precision": 0.6505084745762711,
+          "recall": 0.5575246949447995,
+          "f1-score": 0.6004380475594493,
+          "support": 3442.0
+        },
+        "Éxito Académico (1)": {
+          "precision": 0.5732698234799664,
+          "recall": 0.6649333766655834,
+          "f1-score": 0.6157086969605778,
+          "support": 3077.0
+        },
+        "accuracy": 0.6082221199570487,
+        "macro avg": {
+          "precision": 0.6118891490281188,
+          "recall": 0.6112290358051915,
+          "f1-score": 0.6080733722600136,
+          "support": 6519.0
+        },
+        "weighted avg": {
+          "precision": 0.6140514521152602,
+          "recall": 0.6082221199570487,
+          "f1-score": 0.6076458690362513,
+          "support": 6519.0
+        }
+      }
+    }
+  },
+  "temporal_cohort_evaluation": {
+    "train_cohorts": [
+      "2013B",
+      "2013J",
+      "2014B"
+    ],
+    "test_cohort": "2014J",
+    "train_size": 21333,
+    "test_size": 11260,
+    "accuracy": 0.6141,
+    "balanced_accuracy": 0.6133,
+    "roc_auc": 0.655,
+    "f1_class_0_fracaso": 0.6312,
+    "f1_class_1_exito": 0.5954
+  },
+  "feature_importances": [
+    {
+      "feature": "studied_credits",
+      "importance": 0.16781265520976216
+    },
+    {
+      "feature": "highest_education_Lower Than A Level",
+      "importance": 0.14012663545232296
+    },
+    {
+      "feature": "num_of_prev_attempts",
+      "importance": 0.08032195995135066
+    },
+    {
+      "feature": "code_module_CCC",
+      "importance": 0.05065117308282134
+    },
+    {
+      "feature": "age_band_35-55",
+      "importance": 0.0365738989223265
+    },
+    {
+      "feature": "code_module_GGG",
+      "importance": 0.032406265745574106
+    },
+    {
+      "feature": "highest_education_HE Qualification",
+      "importance": 0.032137734476448895
+    },
+    {
+      "feature": "disability_Y",
+      "importance": 0.0274419615715912
+    },
+    {
+      "feature": "code_presentation_2014B",
+      "importance": 0.02572330444576663
+    },
+    {
+      "feature": "code_module_DDD",
+      "importance": 0.0252821720887651
+    },
+    {
+      "feature": "imd_band_90-100%",
+      "importance": 0.02390177835177558
+    },
+    {
+      "feature": "gender_M",
+      "importance": 0.023898389838944066
+    },
+    {
+      "feature": "imd_band_10-20",
+      "importance": 0.023267503205507026
+    },
+    {
+      "feature": "code_presentation_2014J",
+      "importance": 0.021750087593023396
+    },
+    {
+      "feature": "code_presentation_2013J",
+      "importance": 0.017199665724367756
+    },
+    {
+      "feature": "region_London Region",
+      "importance": 0.016192539439548865
+    },
+    {
+      "feature": "region_North Western Region",
+      "importance": 0.014919320801372357
+    },
+    {
+      "feature": "code_module_EEE",
+      "importance": 0.014297540093975882
+    },
+    {
+      "feature": "imd_band_80-90%",
+      "importance": 0.01418176418623923
+    },
+    {
+      "feature": "code_module_FFF",
+      "importance": 0.013503553770299033
+    },
+    {
+      "feature": "imd_band_20-30%",
+      "importance": 0.012913090703100592
+    },
+    {
+      "feature": "code_module_BBB",
+      "importance": 0.01290836877755195
+    },
+    {
+      "feature": "region_South Region",
+      "importance": 0.01215846265354471
+    },
+    {
+      "feature": "highest_education_No Formal quals",
+      "importance": 0.011997826589615497
+    },
+    {
+      "feature": "imd_band_60-70%",
+      "importance": 0.011864568488841114
+    },
+    {
+      "feature": "region_Scotland",
+      "importance": 0.011002966838618391
+    },
+    {
+      "feature": "region_South East Region",
+      "importance": 0.010741038432140604
+    },
+    {
+      "feature": "imd_band_70-80%",
+      "importance": 0.01074017624785231
+    },
+    {
+      "feature": "region_Ireland",
+      "importance": 0.01045672023256239
+    },
+    {
+      "feature": "region_East Midlands Region",
+      "importance": 0.00982320128894194
+    },
+    {
+      "feature": "imd_band_50-60%",
+      "importance": 0.009622466753229992
+    },
+    {
+      "feature": "region_South West Region",
+      "importance": 0.00956137642533318
+    },
+    {
+      "feature": "region_North Region",
+      "importance": 0.009359427355885153
+    },
+    {
+      "feature": "imd_band_40-50%",
+      "importance": 0.009268195082067401
+    },
+    {
+      "feature": "region_West Midlands Region",
+      "importance": 0.009251474528940713
+    },
+    {
+      "feature": "region_Yorkshire Region",
+      "importance": 0.008897816688427058
+    },
+    {
+      "feature": "imd_band_30-40%",
+      "importance": 0.008877921978881336
+    },
+    {
+      "feature": "highest_education_Post Graduate Qualification",
+      "importance": 0.007360122932224691
+    },
+    {
+      "feature": "region_Wales",
+      "importance": 0.007202524392460335
+    },
+    {
+      "feature": "age_band_55<=",
+      "importance": 0.004402349657997978
+    }
+  ],
+  "example_prediction": {
+    "input": {
+      "num_of_prev_attempts": 2,
+      "studied_credits": 120,
+      "code_module": "CCC",
+      "code_presentation": "2014J",
+      "gender": "M",
+      "region": "North Western Region",
+      "highest_education": "Lower Than A Level",
+      "imd_band": "10-20",
+      "age_band": "0-35",
+      "disability": "N"
+    },
+    "predicted_class": 0,
+    "prob_fracaso_0": 0.7919,
+    "prob_exito_1": 0.2081
+  }
+}
