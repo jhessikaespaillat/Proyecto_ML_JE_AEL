@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Presentación Interactiva en Español | Asistente IA Planificación Docente - UFHEC</title>
+    <style>
+        :root {
+            --bg-dark: #0b192c;
+            --card-bg: #162a45;
+            --accent: #f59e0b;
+            --text-light: #f8fafc;
+            --text-muted: #cbd5e1;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background: #07111e;
+            border-bottom: 2px solid var(--accent);
+            padding: 0.9rem 1.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .brand {
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+        .brand span {
+            background: var(--accent);
+            color: #07111e;
+            padding: 0.15rem 0.55rem;
+            border-radius: 4px;
+            margin-right: 0.5rem;
+            font-size: 0.82rem;
+        }
+        .controls {
+            display: flex;
+            gap: 0.65rem;
+            align-items: center;
+        }
+        button {
+            background-color: var(--accent);
+            color: #0f172a;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.88rem;
+        }
+        button.secondary {
+            background-color: #334155;
+            color: #ffffff;
+        }
+        button:hover { opacity: 0.92; }
+        main {
+            flex: 1;
+            max-width: 1180px;
+            width: 100%;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 1.5rem;
+        }
+        .slide-stage {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 14px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+        }
+        .slide-badge {
+            display: inline-block;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .slide-title {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            line-height: 1.25;
+        }
+        .slide-body {
+            font-size: 1.02rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+        .slide-body ul {
+            padding-left: 1.3rem;
+            margin-top: 0.75rem;
+        }
+        .slide-body li { margin-bottom: 0.55rem; }
+        .slide-img {
+            margin-top: 1.1rem;
+            max-height: 290px;
+            object-fit: contain;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 0.4rem;
+        }
+        .teleprompter {
+            background: #0f2138;
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            border-radius: 14px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .teleprompter h3 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 0.5rem;
+        }
+        .narration-text {
+            font-size: 1.03rem;
+            line-height: 1.7;
+            color: #e2e8f0;
+            flex: 1;
+            overflow-y: auto;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #1e293b;
+            border-radius: 999px;
+            margin-top: 1.25rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 14.28%;
+            transition: width 0.3s ease;
+        }
+        @media (max-width: 900px) {
+            main { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <span>UFHEC · IAE-2501</span> Video Explicativo: Asistente de IA para la Planificación Docente
+        </div>
+        <div class="controls">
+            <button class="secondary" id="btn-prev">⏮ Anterior</button>
+            <button id="btn-play">▶ Reproducir con Narración en Español</button>
+            <button class="secondary" id="btn-stop">⏹ Detener Voz</button>
+            <button class="secondary" id="btn-next">Siguiente ⏭</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="slide-stage">
+            <div>
+                <span class="slide-badge" id="st-time">Bloque 1 de 7 (00:00 - 00:45)</span>
+                <h1 class="slide-title" id="st-title">Cargando presentación...</h1>
+                <div class="slide-body" id="st-body"></div>
+                <img id="st-img" class="slide-img" src="../assets/img/fig1_distribucion_resultados.png" alt="Visualización del proyecto">
+            </div>
+            <div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="st-prog"></div>
+                </div>
+            </div>
+        </section>
+
+        <aside class="teleprompter">
+            <h3>🎙️ Guion Sincronizado en Español (Narradora: Jhessika Lidabed Espaillat)</h3>
+            <div class="narration-text" id="st-narration"></div>
+        </aside>
+    </main>
+
+    <script>
+        const slides = [
+            {
+                time: "Bloque 1 de 7 (00:00 – 00:45)",
+                title: "1. Problema Educativo y Contextualización",
+                body: `<ul>
+                    <li><strong>Autora:</strong> Jhessika Lidabed Espaillat Espaillat</li>
+                    <li><strong>Docente:</strong> Feibert Guzmán | <strong>Asignatura:</strong> Aprendizaje Automático (IAE-2501)</li>
+                    <li><strong>Institución:</strong> Universidad Federico Henríquez y Carvajal (UFHEC)</li>
+                    <li><strong>Problema abordado:</strong> La detección tradicional del fracaso o retiro universitario es reactiva. Se requiere un sistema predictivo que asista al docente desde la matrícula inicial para planificar acompañamientos preventivos.</li>
+                </ul>`,
+                img: "../assets/img/fig1_distribucion_resultados.png",
+                narration: "Un cordial saludo al docente Feibert Guzmán y a la comunidad académica de la Universidad Federico Henríquez y Carvajal, UFHEC. Mi nombre es Jhessika Lidabed Espaillat Espaillat, participante de la Maestría en Inteligencia Artificial Aplicada a la Educación e Investigación, y presento el proyecto final de la asignatura Aprendizaje Automático: Asistente de Inteligencia Artificial para la Planificación Docente. En la educación superior, la detección de estudiantes en riesgo suele ocurrir de forma tardía. Nuestro proyecto transforma los datos históricos de matrícula en alertas preventivas para planificar tutorías y recursos antes de que el fracaso sea irreversible."
+            },
+            {
+                time: "Bloque 2 de 7 (00:45 – 01:30)",
+                title: "2. El Dataset Open University Learning Analytics (OULAD)",
+                body: `<ul>
+                    <li><strong>Fuente:</strong> <code>studentInfo.csv</code> con <strong>32,593 registros estudiantiles</strong> en 7 módulos y 4 cohortes (2013B–2014J).</li>
+                    <li><strong>Clase 0 (Fracaso o Retiro — Fail / Withdrawn):</strong> 17,208 estudiantes (<strong>52.79%</strong>).</li>
+                    <li><strong>Clase 1 (Éxito Académico — Pass / Distinction):</strong> 15,385 estudiantes (<strong>47.21%</strong>).</li>
+                    <li><strong>10 Variables Predictoras:</strong> 2 numéricas (<code>num_of_prev_attempts</code>, <code>studied_credits</code>) y 8 categóricas (módulo, cohorte, género, región, escolaridad previa, banda socioeconómica IMD, edad y discapacidad).</li>
+                </ul>`,
+                img: "../assets/img/fig2_intentos_previos.png",
+                narration: "Utilizamos el conjunto de datos abierto Open University Learning Analytics Dataset, OULAD, específicamente la tabla maestra studentInfo con 32,593 registros. Formulamos una clasificación binaria donde la Clase 0 agrupa el fracaso académico o retiro, con el 52.79 por ciento de los casos, y la Clase 1 representa el éxito académico, con el 47.21 por ciento. Empleamos diez variables predictoras sociodemográficas y de matrícula disponibles desde el primer día de clases."
+            },
+            {
+                time: "Bloque 3 de 7 (01:30 – 02:20)",
+                title: "3. Procesamiento Sin Fuga (Leak-Free ETL), EDA y YData Profiling",
+                body: `<ul>
+                    <li><strong>Prevención de Data Leakage:</strong> Partición estratificada 80/20 (<code>26,074</code> entrenamiento / <code>6,519</code> prueba) <em>antes</em> de ajustar <code>SimpleImputer</code>, <code>StandardScaler</code> y <code>OneHotEncoder</code> (56 atributos).</li>
+                    <li><strong>Calidad auditada con YData Profiling:</strong> 1,111 faltantes únicamente en <code>imd_band</code> (3.41%), 0 duplicados.</li>
+                    <li><strong>Hallazgos del EDA:</strong> A partir de 2 intentos previos la aprobación cae por debajo del 34%; la mayor privación socioeconómica (IMD 0-20%) y la sobrecarga de créditos elevan sustancialmente el abandono.</li>
+                </ul>`,
+                img: "../assets/img/fig3_creditos_educacion.png",
+                narration: "Implementamos un pipeline libre de fuga de información. Dividimos primero los datos en 26,074 registros de entrenamiento y 6,519 de prueba, ajustando la imputación y la codificación One-Hot exclusivamente con los datos de entrenamiento. El análisis exploratorio y el reporte de YData Profiling demostraron que tener intentos fallidos previos, cursar más de 120 créditos simultáneos o provenir de entornos de mayor vulnerabilidad socioeconómica incrementan significativamente el riesgo de retiro."
+            },
+            {
+                time: "Bloque 4 de 7 (02:20 – 03:15)",
+                title: "4. Modelo Random Forest y Evaluación Comparativa",
+                body: `<ul>
+                    <li><strong>Modelo Principal:</strong> <code>RandomForestClassifier</code> regularizado con balanceo por submuestra frente a <code>LogisticRegression</code> y <code>DecisionTreeClassifier</code>.</li>
+                    <li><strong>Métricas en Prueba (n = 6,519):</strong> ROC-AUC de <strong>0.680</strong>, Accuracy de <strong>63.6%</strong>, Balanced Accuracy de <strong>63.6%</strong> y sensibilidad (Recall) de <strong>61.8%</strong> en la detección de la Clase 0 (riesgo).</li>
+                    <li><strong>Estabilidad:</strong> Validación Cruzada 5-Fold (ROC-AUC 0.679) y validación temporal en la cohorte independiente <code>2014J</code>.</li>
+                </ul>`,
+                img: "../assets/img/fig6_curvas_roc.png",
+                narration: "Entrenamos como modelo principal un Random Forest Classifier y lo comparamos contra Regresión Logística y Árbol de Decisión. En el conjunto de prueba de 6,519 estudiantes, Random Forest obtuvo el mejor desempeño con un área bajo la curva ROC de 0.680, una exactitud de 63.6 por ciento y una sensibilidad superior al 61.8 por ciento para detectar estudiantes en riesgo de fracaso o retiro, manteniendo su estabilidad tanto en validación cruzada de cinco pliegues como en la cohorte futura 2014J."
+            },
+            {
+                time: "Bloque 5 de 7 (03:15 – 04:00)",
+                title: "5. Demostración de la Aplicación Web en Streamlit",
+                body: `<ul>
+                    <li><strong>Pestaña 1:</strong> Galería interactiva del EDA, métricas verificadas, matrices de confusión, curvas ROC, importancia de variables y reporte YData Profiling.</li>
+                    <li><strong>Pestaña 2 (Simulador Inteligente):</strong> Selector de escenarios preconfigurados y formulario validado para las 10 características del estudiante.</li>
+                    <li><strong>Inferencia Consistente:</strong> Transformación directa mediante el pipeline serializado sin asignar ceros arbitrarios.</li>
+                </ul>`,
+                img: "../assets/img/fig5_matrices_confusion.png",
+                narration: "Desarrollamos una aplicación modular en Streamlit con dos pestañas. La primera presenta el análisis exploratorio y la evaluación comparativa de los modelos. La segunda pestaña contiene el Simulador Inteligente de Planificación Docente, donde el profesor puede cargar escenarios de prueba o introducir las diez características de un estudiante para obtener en tiempo real la clase estimada y las probabilidades de fracaso y éxito."
+            },
+            {
+                time: "Bloque 6 de 7 (04:00 – 04:40)",
+                title: "6. Interpretación y Motor de Reglas Pedagógicas (7 Dimensiones)",
+                body: `<ul>
+                    <li><strong>Separación Arquitectónica:</strong> El modelo estima la probabilidad estadística; un motor determinista audita las reglas pedagógicas en 7 dimensiones:</li>
+                    <li>1. Tutorías individuales | 2. Actividades de refuerzo | 3. Recursos complementarios (DUA) | 4. Evaluaciones formativas | 5. Retroalimentación personalizada | 6. Seguimiento de participación | 7. Ajustes en la planificación docente.</li>
+                </ul>`,
+                img: "../assets/img/fig7_importancia_variables.png",
+                narration: "Nuestro diseño distingue claramente entre la predicción probabilística del modelo y las recomendaciones pedagógicas basadas en reglas explícitas. Ante un perfil con sobrecarga de créditos e intentos previos, el motor activa recomendaciones específicas en siete dimensiones docentes: tutorías quincenales, actividades de refuerzo propedéutico, recursos accesibles bajo Diseño Universal para el Aprendizaje, evaluaciones formativas semanales, retroalimentación temprana, seguimiento de participación y ajuste de carga crediticia."
+            },
+            {
+                time: "Bloque 7 de 7 (04:40 – 05:15)",
+                title: "7. Conclusiones, Limitaciones y Uso Ético",
+                body: `<ul>
+                    <li><strong>Conclusión:</strong> La analítica de aprendizaje permite anticipar más del 61% de los casos de fracaso o retiro desde el inicio del curso.</li>
+                    <li><strong>Limitación y Mejora Futura:</strong> Integrar registros semanales del entorno virtual (<code>studentVle.csv</code>) y notas parciales para incrementar el poder predictivo intra-semestral.</li>
+                    <li><strong>Compromiso Ético:</strong> Toda predicción es una estimación orientativa sujeta a incertidumbre y jamás sustituye el juicio pedagógico del docente.</li>
+                </ul>`,
+                img: "../assets/img/fig4_correlacion_imd.png",
+                narration: "En conclusión, este prototipo demuestra el valor de la inteligencia artificial como aliada de la planificación docente preventiva. Como mejora futura se contempla integrar la actividad semanal en el entorno virtual para refinar las predicciones durante el semestre. Reafirmamos finalmente nuestro compromiso ético: ninguna predicción es un diagnóstico definitivo ni una sentencia sobre el estudiante, sino una orientación preventiva al servicio de una educación más humana e inclusiva. Muchas gracias."
+            }
+        ];
+
+        let currentIdx = 0;
+        let autoPlaying = false;
+
+        function renderSlide(idx) {
+            const s = slides[idx];
+            document.getElementById("st-time").textContent = s.time;
+            document.getElementById("st-title").textContent = s.title;
+            document.getElementById("st-body").innerHTML = s.body;
+            document.getElementById("st-img").src = s.img;
+            document.getElementById("st-narration").textContent = s.narration;
+            document.getElementById("st-prog").style.width = (((idx + 1) / slides.length) * 100).toFixed(1) + "%";
+        }
+
+        function speakCurrentSlide() {
+            if (!("speechSynthesis" in window)) return;
+            window.speechSynthesis.cancel();
+            const utter = new SpeechSynthesisUtterance(slides[currentIdx].narration);
+            utter.lang = "es-ES";
+            utter.rate = 1.02;
+            utter.onend = () => {
+                if (autoPlaying && currentIdx < slides.length - 1) {
+                    currentIdx++;
+                    renderSlide(currentIdx);
+                    speakCurrentSlide();
+                } else {
+                    autoPlaying = false;
+                }
+            };
+            window.speechSynthesis.speak(utter);
+        }
+
+        document.getElementById("btn-prev").addEventListener("click", () => {
+            autoPlaying = false;
+            if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+            currentIdx = (currentIdx - 1 + slides.length) % slides.length;
+            renderSlide(currentIdx);
+        });
+
+        document.getElementById("btn-next").addEventListener("click", () => {
+            autoPlaying = false;
+            if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+            currentIdx = (currentIdx + 1) % slides.length;
+            renderSlide(currentIdx);
+        });
+
+        document.getElementById("btn-play").addEventListener("click", () => {
+            autoPlaying = true;
+            speakCurrentSlide();
+        });
+
+        document.getElementById("btn-stop").addEventListener("click", () => {
+            autoPlaying = false;
+            if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+        });
+
+        renderSlide(0);
+    </script>
+</body>
+</html>
+
